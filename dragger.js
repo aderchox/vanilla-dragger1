@@ -4,9 +4,9 @@
 function dragger(container) {
   let startX, startY;
 
-  container.addEventListener("mousedown", mousedown);
+  container.addEventListener("pointerdown", pointerdown);
 
-  function mousedown(event) {
+  function pointerdown(event) {
     // console.log("inside container: ", { container: this });
     const isDragger = event.target.matches("[data-dragger]");
     if (!isDragger) {
@@ -16,15 +16,15 @@ function dragger(container) {
     startX = event.x;
     startY = event.y;
 
-    let boundMousemove = mousemove.bind(dragger);
-    let boundMouseup = mouseup.bind(boundMousemove);
-    // Because DOM re-renders may fall behind the rapid mouse movement, mousemove and mouseup are attached to the window object instead of the dragger itself.
-    // Because mousemove's handler is removed in mouseup, it must be re-installed here inside mousedown, each time.
-    window.addEventListener("mousemove", boundMousemove);
-    window.addEventListener("mouseup", boundMouseup);
+    let boundPointermove = pointermove.bind(dragger);
+    let boundPointerup = pointerup.bind(boundPointermove);
+    // Because DOM re-renders may fall behind the rapid pointer movement, pointermove and pointerup are attached to the window object instead of the dragger itself.
+    // Because pointermove's handler is removed in pointerup, it must be re-installed here inside pointerdown, each time.
+    window.addEventListener("pointermove", boundPointermove);
+    window.addEventListener("pointerup", boundPointerup);
   }
 
-  function mousemove(event) {
+  function pointermove(event) {
     let dragger = this; // NOTE: Requires event binding of the dragger on call.
     let xMove = event.x - startX;
     let yMove = event.y - startY;
@@ -38,9 +38,9 @@ function dragger(container) {
     dragger.style.left = parseInt(dragger.style.left) + xMove + "px";
   }
 
-  function mouseup(event) {
-    let boundMousemove = this;
-    window.removeEventListener("mousemove", boundMousemove);
+  function pointerup(event) {
+    let boundPointermove = this;
+    window.removeEventListener("pointermove", boundPointermove);
   }
 }
 
