@@ -9,7 +9,7 @@ Requirements:
 - [ ] Revert on spill
 - [ ] Remove on spill
 - [ ] Copying on drop + Unidirectional copying on drop
-- [ ] 
+- [ ] Don't go out of view
 - [ ] Drag with handle
 - [ ] Animation on re-ordering
 - [ ] Snapping drop preview
