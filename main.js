@@ -8,18 +8,20 @@ children.forEach((child) => {
 function mousedown(event) {
   startX = event.x;
   startY = event.y;
+
+  let boundMousemove = mousemove.bind(event.target);
+  let boundMouseup = mouseup.bind(boundMousemove);
   // Because mousemove's handler is removed in mouseup, and so must be re-installed here inside mousedown, each time.
-  event.currentTarget.addEventListener("mousemove", mousemove);
-  event.currentTarget.addEventListener("mouseup", mouseup);
+  window.addEventListener("mousemove", boundMousemove);
+  window.addEventListener("mouseup", boundMouseup);
 }
 
 function mousemove(event) {
+  let item = this; // NOTE: Requires event binding on call.
   let xMove = event.x - startX;
   let yMove = event.y - startY;
   startX = event.x;
   startY = event.y;
-
-  let item = event.currentTarget;
 
   // NOTE: Position is relative.
   item.style.top = item.style.top || 0;
@@ -29,5 +31,6 @@ function mousemove(event) {
 }
 
 function mouseup(event) {
-  event.currentTarget.removeEventListener("mousemove", mousemove);
+  let boundMousemove = this;
+  window.removeEventListener("mousemove", boundMousemove);
 }
