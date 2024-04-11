@@ -1,0 +1,23 @@
+.container {
+    border: 1px solid chocolate;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .child {
+    border: 1px solid yellowgreen;
+    padding: 10px;
+    position: relative;
+    user-select: none;
+  }
+  
+  .child:not(:last-child) {
+    margin-block-end: 20px;
+  }
+
+/* .handle {
+  position: absolute;
+  right: 20px;
+  font-weight: bold;
+  cursor: grab;
+} */

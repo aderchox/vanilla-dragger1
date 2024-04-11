@@ -1,0 +1,8 @@
+node_modules
+build
+dist
+.vscode
+.env
+.env.*
+!.env.example
+!.env.template
